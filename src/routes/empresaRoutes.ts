@@ -8,4 +8,9 @@ empresaRoutes.get("/", controller.listar);
 empresaRoutes.get("/:id", controller.buscarPorId);
 empresaRoutes.post("/", controller.criar);
 
+empresaRoutes.patch(
+  "/:id/aprovar",
+  controller.aprovar
+);
+
 export { empresaRoutes };

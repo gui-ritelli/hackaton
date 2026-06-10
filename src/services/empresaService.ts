@@ -19,4 +19,8 @@ export class EmpresaService {
   }) {
     return this.repository.criar(data);
   }
+
+  async aprovar(id: number) {
+    return this.repository.aprovar(id);
+  }
 }

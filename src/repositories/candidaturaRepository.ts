@@ -22,4 +22,14 @@ export class CandidaturaRepository {
       },
     });
   }
+
+  async alterarStatus(
+    id: number,
+    status: "APROVADO" | "REPROVADO"
+  ) {
+    return prisma.candidatura.update({
+      where: { id },
+      data: { status },
+    });
+  }
 }

@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
 import { VagaService } from "../services/vagaService";
+import { vagaSchema } from "../schemas/vagaSchema";
 
 export class VagaController {
   private service = new VagaService();
 
   criar = async (req: Request, res: Response) => {
-    const vaga = await this.service.criar(req.body);
+    try {
+      const dados = vagaSchema.parse(req.body);
 
-    return res.status(201).json(vaga);
+      const vaga = await this.service.criar(dados);
+
+      return res.status(201).json(vaga);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   };
 
   listar = async (_req: Request, res: Response) => {

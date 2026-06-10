@@ -21,4 +21,13 @@ export class EmpresaRepository {
       data,
     });
   }
+
+  async aprovar(id: number) {
+    return prisma.empresa.update({
+      where: { id },
+      data: {
+        aprovada: true,
+      },
+    });
+  }
 }

@@ -1,13 +1,20 @@
 import { Request, Response } from "express";
 import { AlunoService } from "../services/alunoService";
+import { alunoSchema } from "../schemas/alunoSchema";
 
 export class AlunoController {
   private service = new AlunoService();
 
   criar = async (req: Request, res: Response) => {
-    const aluno = await this.service.criar(req.body);
+    try {
+      const dados = alunoSchema.parse(req.body);
 
-    return res.status(201).json(aluno);
+      const aluno = await this.service.criar(dados);
+
+      return res.status(201).json(aluno);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   };
 
   listar = async (_req: Request, res: Response) => {
@@ -17,7 +24,9 @@ export class AlunoController {
   };
 
   buscarPorId = async (req: Request, res: Response) => {
-    const aluno = await this.service.buscarPorId(Number(req.params.id));
+    const aluno = await this.service.buscarPorId(
+      Number(req.params.id)
+    );
 
     return res.json(aluno);
   };

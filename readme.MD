@@ -1,0 +1,1 @@
+Desenvolvi o backend do Portal de Estágios utilizando Node.js, Express, TypeScript, Prisma e MySQL. Foi criada uma API REST organizada em Controllers, Services e Repositories. O banco possui as entidades Aluno, Empresa, Vaga e Candidatura com relacionamentos. Também implementei validações utilizando Zod, aprovação de empresas e aprovação/reprovação de candidaturas.

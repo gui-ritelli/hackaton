@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { EmpresaService } from "../services/empresaService";
+import { empresaSchema } from "../schemas/empresaSchema";
 
 export class EmpresaController {
   private service = new EmpresaService();
@@ -19,8 +20,22 @@ export class EmpresaController {
   };
 
   criar = async (req: Request, res: Response) => {
-    const empresa = await this.service.criar(req.body);
+    try {
+      const dados = empresaSchema.parse(req.body);
 
-    return res.status(201).json(empresa);
+      const empresa = await this.service.criar(dados);
+
+      return res.status(201).json(empresa);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
+  };
+
+  aprovar = async (req: Request, res: Response) => {
+    const empresa = await this.service.aprovar(
+      Number(req.params.id)
+    );
+
+    return res.json(empresa);
   };
 }

@@ -13,4 +13,14 @@ export class CandidaturaService {
   async listar() {
     return this.repository.listar();
   }
+
+  async alterarStatus(
+    id: number,
+    status: "APROVADO" | "REPROVADO"
+  ) {
+    return this.repository.alterarStatus(
+      id,
+      status
+    );
+  }
 }
